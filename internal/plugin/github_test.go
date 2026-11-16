@@ -23,7 +23,7 @@ import (
 // archived one and magpie-community's — and someone/word-guard, whose
 // package.json is word-guard's own, a middleware alone; someone/agent-aider,
 // magpie-community's agent-aider package.json and module, an agent alone;
-// someone/page-glance, a page alone (internal/gui/testdata/page-plugin's
+// someone/page-glance, a page with a local service (internal/gui/testdata/page-plugin's
 // package.json), and someone/page-gone, whose page file isn't there; alfaoz's
 // opencode-see-image (real), whose main is a dist the repository hasn't;
 // and someone/flaky-entry, whose main GitHub doesn't answer for.
@@ -227,10 +227,10 @@ func TestTaggedRepos(t *testing.T) {
 	if x := byRepo["someone/agent-aider"]; x.Kind != "agent" || x.Spec != "github:someone/agent-aider" {
 		t.Fatalf("an agent alone: %+v", x)
 	}
-	// a page alone: no module, magpie.page's file in the repository; one
+	// a page with a local service: its module and magpie.page's file in the repository; one
 	// whose file isn't there would show nothing, and isn't listed
 	if x := byRepo["someone/page-glance"]; x.Kind != "page" || x.Spec != "github:someone/page-glance" || x.Package != "magpie-usage-glance" {
-		t.Fatalf("a page alone: %+v", x)
+		t.Fatalf("a page with a service: %+v", x)
 	}
 	if x := byRepo["someone/word-guard"]; x.Kind != "middleware" || x.Package != "@magpie-community/middleware-word-guard" || x.License != "MIT" {
 		t.Fatalf("a middleware alone: %+v", x)

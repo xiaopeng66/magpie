@@ -1,9 +1,10 @@
 {
   "name": "magpie-usage-glance",
   "version": "0.1.0",
+  "main": "server/index.mjs",
   "description": "An example of a plugin's own page in magpie's window: today's usage at a glance",
   "magpie": {
-    "page": { "title": "Usage glance", "file": "page/index.html", "icon": "page/icon.svg" },
+    "page": { "title": "Usage glance", "file": "page/index.html", "icon": "page/icon.svg", "service": { "port": 3489 } },
     "permissions": ["usage:summary"]
   }
 }

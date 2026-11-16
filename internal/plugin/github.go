@@ -45,7 +45,7 @@ type Tagged struct {
 	// it as, its version, and whether it is gateway middleware or an agent
 	Package string `json:"package,omitempty"`
 	Version string `json:"version,omitempty"`
-	Kind    string `json:"kind,omitempty"` // "agent" when it adds an agent (a module of its own too or not); "middleware", "page" or "hooks" when that is all it is
+	Kind    string `json:"kind,omitempty"` // "agent" when it adds an agent (a module of its own too or not); "middleware" or "hooks" when that is all it is; "page" when it declares magpie.page.file
 	// its package.json's magpie.icon, as an installed plugin gives its
 	// provider one: an https URL or a data:image URI, as it is written
 	Icon string `json:"icon,omitempty"`
@@ -469,7 +469,7 @@ func readTagged(pc context.Context, t Tagged, branch string) (Tagged, bool, bool
 	// (plugins#737)
 	case strings.TrimSpace(pj.Magpie.Agent) != "":
 		t.Kind = "agent"
-	case !runs && strings.TrimSpace(pj.Magpie.Page.File) != "":
+	case strings.TrimSpace(pj.Magpie.Page.File) != "":
 		t.Kind = "page"
 	// gateway hooks alone (magpie.hooks) need no entry of their
 	// own, as the host loads them: the hooks file is the one to
